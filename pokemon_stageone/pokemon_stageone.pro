@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    pokemon.cpp
+    pokemon.cpp \
+    highattack.cpp
 
 HEADERS += \
         mainwindow.h \
-    pokemon.h
+    pokemon.h \
+    highattack.h
 
 FORMS += \
         mainwindow.ui

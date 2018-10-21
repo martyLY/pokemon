@@ -7,7 +7,7 @@ QString Pokemon::getName() {
 QString Pokemon::getAllAttritubeInfo() {
     QString info, number;
     info = "Name: " + this->name;
-    info = info + "\t" + "Level: " + number.setNum(this->level) + "\n";
+    info = info + '\t' + "Level: " + number.setNum(this->level) + "\n";
     info = info + "PokemonRace: " + getRace() + "\n";
     info = info + "Kind: " + POKEMONKIND[(int(this->kind))] + "\n";
     info = info + "Rarity: " + RARITY[int(this->rarity)] + "\n";
@@ -18,7 +18,7 @@ QString Pokemon::getAllAttritubeInfo() {
     info = info + "Avoid: " + number.setNum(this->avoid) + "\n";
     info = info + "Critical: " + number.setNum(this->critical) + "\n";
     info = info + "BaseSkill: " + BASESKILL[int(this->baseSkill)] + "\n";
-    info = info + "UltimateSkill" + getUltimateSkill() + "\n";
+    //info = info + "UltimateSkill" + getUltimateSkill() + "\n";
 
     return info;
 }
@@ -32,8 +32,10 @@ void Pokemon::expUp(unsigned int _exp) {
     while(cur_exp > exp) {
         this->levelUp();
         cur_exp -= exp;
-        exp = (unsigned int)(exp*1.8); //升级的经验值增长
+        exp = (unsigned int)(exp*1.2); //升级的经验值增长
     }
+    this->battle_hp = max_hp;
+
 }
 
 void Pokemon::setBaseSkill() {

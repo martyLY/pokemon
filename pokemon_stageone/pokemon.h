@@ -10,6 +10,7 @@
 #include <QTime>
 #include <QDebug>
 #include <QtGlobal>
+#include <QMap>
 
 #define MAX_LEVEL 15
 
@@ -38,9 +39,20 @@ enum BaseSkill
     bloodsucking,
 };
 
-const QList<QString> BASESKILL = {};
+const QList<QString> BASESKILL = {"Buring", "Frozen", "BloodSucking"};
+
+/*精灵种类*/
+enum Race {
+    the_frozen_archer_Ashe = 0,
+    the_dark_child_Anne,
+    the_crimson_reaper_Vladimir,
+};
+const QList<QString> RACE = {"The Frozen Archer Ashe",
+                             "The Dark Child Anne",
+                             "The Crimson Reaper Vladimir"};
 
 /*不同稀有度的属性基础乘积系数*/
+/*
 const double UForMain = 0.05;
 const double RForMain = 0.1;
 const double SRForMain = 0.3;
@@ -52,27 +64,37 @@ const double RForNormal = 0.03;
 const double SRForNormal = 0.1;
 const double SSRForNormal = 0.15;
 const double URForNormal = 0.2;
+*/
 
+static QMap<QString, double> coForMain {
+    {"N",0}, {"U", 0.05}, {"R", 0.06},
+    {"SR", 0.08}, {"SSR", 0.1}, {"UR", 0.12},
+};
+
+static QMap<QString, double> coForNormal {
+    {"N",0}, {"U", 0}, {"R", 0.03},
+    {"SR", 0.04}, {"SSR", 0.06}, {"UR", 0.08},
+};
 
 
 class Pokemon : public QObject
 {
     Q_OBJECT
 public:
-    Pokemon():level(1),exp(0){}
+    Pokemon():level(1),cur_exp(0),exp(100){}
     virtual ~Pokemon(){}
 
     QString getName();
     QString getAllAttritubeInfo();
     unsigned int getLevel();
     void expUp(unsigned int exp);
-    virtual QString getRace(){};
-    virtual QString getUltimateSkill(){};
+    virtual QString getRace() = 0;
+    //virtual QString getUltimateSkill() = 0;
 
 
     virtual void levelUp(){}
-    virtual void skillAttack(){}
-
+    virtual QPair<unsigned int, BaseSkill> Attack() = 0;
+    virtual void getHurt(QPair<unsigned int, BaseSkill> damage) = 0;
 protected:
     /*pokemon's attribute*/
     QString name;
@@ -83,25 +105,26 @@ protected:
     unsigned int defense_power; //基础防御力
     unsigned int max_hp; //最大生命值
     unsigned int battle_hp; //当前生命值
-    unsigned int wsp; //攻击速度
-    unsigned int avoid; //回避率
-    unsigned int critical; //暴击率
+    double wsp; //攻击速度
+    double avoid; //回避率
+    double critical; //暴击率
 
     pokemonKind kind; //精灵种类
     Rarity rarity; //稀有度
     BaseSkill baseSkill; //基础技能技能
+    Race race; //种类
 
     void setBaseSkill();
     void setRarity();
-    virtual void setKind(){}
+
     //virtual void setRarity(){}
     virtual void setRace(){}
-    virtual void setUltimateSkill(){}
+    //virtual void setUltimateSkill(){}
     virtual void setBaseAttribute(unsigned int _base_attack,
-                          unsigned int _defense_power,
-                          unsigned int _max_hp,
-                          unsigned int _wsp,
-                          unsigned int _avoid,
-                          unsigned int _critical);
+                                  unsigned int _defense_power,
+                                  unsigned int _max_hp,
+                                  double _wsp,
+                                  double _avoid,
+                                  double _critical) {}
 
 };
