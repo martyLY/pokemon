@@ -28,12 +28,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     pokemon.cpp \
-    highattack.cpp
+    highattack.cpp \
+    ashe.cpp
 
 HEADERS += \
         mainwindow.h \
     pokemon.h \
-    highattack.h
+    highattack.h \
+    pokemonsetting.h \
+    ashe.h
 
 FORMS += \
         mainwindow.ui

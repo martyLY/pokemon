@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "highattack.h"
+#include "ashe.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,7 +16,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    HighAttack *test;
+    Ashe *test;
 
 private slots:
     void on_generate_pokemon_clicked();

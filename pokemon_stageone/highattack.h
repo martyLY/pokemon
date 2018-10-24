@@ -19,25 +19,15 @@ const double coLevelupNormal = 0.02;
 class HighAttack : public Pokemon
 {
 public:
-    HighAttack(QString _name);
+    HighAttack(){name = "Pokemon_highattack";initPokemon();}
     ~HighAttack() override {}
-    QString getRace() override;
-    //QString getUltimateSkill() override;
+
+    QString getKind();
 
 protected:
-
+    pokemonKind kind;
     void levelUp() override;
-    QPair<unsigned int, BaseSkill> Attack() override;
-    void getHurt(QPair<unsigned int, BaseSkill> damage) override;
-    //void skillAttack() override;
-    void setRace() override;
-    //void setUltimateSkill() override;
-    void setBaseAttribute(unsigned int _base_attack,
-                          unsigned int _defense_power,
-                          unsigned int _max_hp,
-                          double _wsp,
-                          double _avoid,
-                          double _critical) override;
+    void initPokemon() override;
 
 };
 

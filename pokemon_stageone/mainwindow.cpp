@@ -17,7 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_generate_pokemon_clicked()
 {
-    test = new HighAttack("mashiro");
+    test = new Ashe("mashiro");
     ui->infoShow->setText(test->getAllAttritubeInfo());
 }
 
