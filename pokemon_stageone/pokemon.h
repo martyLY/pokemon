@@ -26,7 +26,7 @@ public:
     bool getHurt(QPair<unsigned int, BaseSkill> damage);
     //virtual QString getName() = 0;
     //virtual QString getUltimateSkill() = 0;
-    virtual void levelUp() = 0;
+
     //virtual QString getRace() = 0;
     //virtual QString getKind() = 0;
     virtual QString getAllAttritubeInfo();
@@ -53,7 +53,7 @@ protected:
 
     void setBaseSkill();
     void setRarity();
-
+    virtual void levelUp() = 0;
     //virtual void setRarity(){}
     //virtual void setRace(){}
     //virtual void setUltimateSkill(){}
