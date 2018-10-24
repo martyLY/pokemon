@@ -1,0 +1,1 @@
+![stage1](/home/mashiro7221/Pokemon/pokemon_stageone/stage1.png)
