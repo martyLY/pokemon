@@ -16,7 +16,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    Ashe *test;
+     Pokemon *test;
 
 private slots:
     void on_generate_pokemon_clicked();
