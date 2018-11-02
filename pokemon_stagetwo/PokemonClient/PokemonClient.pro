@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QT       += network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = PokemonClient
@@ -26,13 +26,30 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    highattack.cpp \
+    ashe.cpp \
+    pokemon.cpp \
+    mainpage.cpp \
+    startmenu.cpp \
+    signuppage.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    ashe.h \
+    pokemon.h \
+    highattack.h \
+    pokemonsetting.h \
+    mainpage.h \
+    startmenu.h \
+    signuppage.h \
+    global.h
 
 FORMS += \
-        mainwindow.ui
+    mainpage.ui \
+    mainwindow.ui \
+    startmenu.ui \
+    signuppage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

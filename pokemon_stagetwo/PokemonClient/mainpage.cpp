@@ -1,6 +1,12 @@
 #include "mainpage.h"
+#include "ui_mainpage.h"
 
-mainpage::mainpage()
+Mainpage::Mainpage(QWidget *parent) :
+    QWidget(parent), mainpageUi(new Ui::Mainpage)
 {
+    mainpageUi->setupUi(this);
+}
 
+Mainpage::~Mainpage() {
+    delete mainpageUi;
 }

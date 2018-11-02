@@ -2,11 +2,21 @@
 #define MAINPAGE_H
 
 #include <QObject>
+#include <QWidget>
 
-class mainpage
+namespace Ui {
+    class Mainpage;
+}
+
+class Mainpage : public QWidget
 {
+    Q_OBJECT
 public:
-    mainpage();
+   explicit  Mainpage(QWidget *parent = nullptr);
+    virtual ~Mainpage();
+
+private:
+    Ui::Mainpage *mainpageUi;
 };
 
 #endif // MAINPAGE_H

@@ -4,6 +4,12 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QStackedLayout>
+#include "global.h"
+#include "mainpage.h"
+#include "startmenu.h"
+#include "signuppage.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,18 +22,20 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    QUdpSocket *user;
+
 private slots:
 
-
-    void on_logininButton_clicked();
-
-    void on_signupButton_clicked();
-
-    void on_check_clicked();
-
 private:
+    Mainpage *mainpage;
+    StartMenu *startmenu;
+    SignupPage *signuppage;
 
     Ui::MainWindow *ui;
+    QStackedLayout *stackedLayout;
+    QVBoxLayout *mainLayout;
+    QWidget *mainWidget;
 };
 
 #endif // MAINWINDOW_H

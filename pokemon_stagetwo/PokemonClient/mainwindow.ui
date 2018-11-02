@@ -17,9 +17,9 @@
    <widget class="QWidget" name="startMenu" native="true">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>190</y>
-      <width>301</width>
+      <x>470</x>
+      <y>180</y>
+      <width>291</width>
       <height>141</height>
      </rect>
     </property>
@@ -131,72 +131,6 @@
        </widget>
       </item>
      </layout>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="signupMenu" native="true">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>80</y>
-      <width>201</width>
-      <height>261</height>
-     </rect>
-    </property>
-    <widget class="QWidget" name="verticalLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>181</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLineEdit" name="signupName">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="placeholderText">
-         <string>Your account name</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="signupPassword">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="placeholderText">
-         <string>Your Password</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="pokemonName">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="placeholderText">
-         <string>Your pokemon's name</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QPushButton" name="check">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>190</y>
-       <width>141</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Generate a Pokemon
-and Account</string>
-     </property>
     </widget>
    </widget>
   </widget>
