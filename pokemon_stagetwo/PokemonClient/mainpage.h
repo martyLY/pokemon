@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QWidget>
+#include "global.h"
 
 namespace Ui {
     class Mainpage;

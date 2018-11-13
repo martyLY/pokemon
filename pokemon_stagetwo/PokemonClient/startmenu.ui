@@ -103,9 +103,9 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="logininButton">
+      <widget class="QPushButton" name="loginButton">
        <property name="text">
-        <string>Login in</string>
+        <string>Login </string>
        </property>
       </widget>
      </item>
@@ -135,13 +135,16 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>80</y>
-      <width>371</width>
+      <y>82</y>
+      <width>391</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
     </property>
    </widget>
   </widget>

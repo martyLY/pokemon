@@ -8,8 +8,6 @@
 #include <QTcpSocket>
 #include <QHostAddress>
 #include "global.h"
-
-
 namespace Ui {
     class StartMenu;
 }
@@ -24,15 +22,15 @@ protected:
 private:
     void initSocket();
     void readPendingDatagram();
-    QHostAddress serverAddr;
-    quint16 port;
+//    QHostAddress serverAddr;
+//    quint16 port;
 private:
     Ui::StartMenu *startmenuUi;
 signals:
     void switchPage(int i);
 public slots:
 private slots:
-    void on_logininButton_clicked();
+    void on_loginButton_clicked();
     void on_signupButton_clicked();
 };
 

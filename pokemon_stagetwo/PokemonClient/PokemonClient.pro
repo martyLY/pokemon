@@ -27,23 +27,15 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    highattack.cpp \
-    ashe.cpp \
-    pokemon.cpp \
     mainpage.cpp \
     startmenu.cpp \
     signuppage.cpp
 
 HEADERS += \
         mainwindow.h \
-    ashe.h \
-    pokemon.h \
-    highattack.h \
-    pokemonsetting.h \
     mainpage.h \
     startmenu.h \
-    signuppage.h \
-    global.h
+    signuppage.h
 
 FORMS += \
     mainpage.ui \
@@ -55,3 +47,12 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../pokemonmodule/release/ -lpokemonmodule
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../pokemonmodule/debug/ -lpokemonmodule
+else:unix: LIBS += -L$$PWD/../pokemonmodule/ -lpokemonmodule
+
+INCLUDEPATH += $$PWD/../pokemonmodule
+DEPENDPATH += $$PWD/../pokemonmodule

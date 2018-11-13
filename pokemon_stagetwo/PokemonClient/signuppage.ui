@@ -6,13 +6,78 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>738</width>
+    <height>470</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QLineEdit" name="signupAccount">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>120</y>
+     <width>191</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Your Account</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="signupPassword">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>160</y>
+     <width>191</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Your Password</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="signupPasswordConfirm">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>200</y>
+     <width>191</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Confirm your password</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="pokemonName">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>240</y>
+     <width>191</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Your Pokemon Name</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="generatePokemon">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>340</y>
+     <width>181</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Generate Random Pokemon</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

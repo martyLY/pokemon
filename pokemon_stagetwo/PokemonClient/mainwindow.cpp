@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+QHostAddress serverAddr(QHostAddress::LocalHost);
+quint16 port = 2333;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -24,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     stackedLayout->setCurrentIndex(0);
     centralWidget()->setLayout(mainLayout);
     connect(startmenu, SIGNAL(switchPage(int)), stackedLayout, SLOT(setCurrentIndex(int)));
+    connect(signuppage, SIGNAL(switchPage(int)), stackedLayout, SLOT(setCurrentIndex(int)));
+
 
 }
 

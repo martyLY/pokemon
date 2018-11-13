@@ -5,7 +5,6 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QStackedLayout>
-#include "global.h"
 #include "mainpage.h"
 #include "startmenu.h"
 #include "signuppage.h"
