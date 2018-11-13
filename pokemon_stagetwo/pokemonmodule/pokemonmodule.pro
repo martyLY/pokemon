@@ -4,9 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += widgets
-
 QT       -= gui
+QT      += network
 
 TARGET = pokemonmodule
 TEMPLATE = lib
@@ -25,13 +24,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        pokemonmodule.cpp
+    highattack.cpp \
+    ashe.cpp \
+    pokemon.cpp
 
 HEADERS += \
-        pokemonmodule.h \
-        pokemonmodule_global.h 
+        pokemonmodule_global.h \ 
+    global.h \
+    pokemon.h \
+    ashe.h \
+    highattack.h \
+    pokemonsetting.h
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+

@@ -2,8 +2,9 @@
 #define GLOBAL_H
 
 #include <QHostAddress>
+#include "pokemonmodule_global.h"
 
-enum datatype : int{
+enum POKEMONMODULESHARED_EXPORT datatype : int{
     login,
     loginyes,
     loginno,
@@ -13,12 +14,12 @@ enum datatype : int{
     signuprepeat,
 };
 
-enum Pagename {
+enum POKEMONMODULESHARED_EXPORT Pagename {
     startmenu,
-    signuppage,q
+    signuppage,
     mainpage,
 };
 
-extern QHostAddress serverAddr;
-extern quint16 port;
+extern POKEMONMODULESHARED_EXPORT QHostAddress serverAddr;
+extern POKEMONMODULESHARED_EXPORT quint16 port;
 #endif // GLOBAL_H

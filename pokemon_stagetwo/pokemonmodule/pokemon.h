@@ -12,7 +12,9 @@
 #include <QtGlobal>
 #include <QMap>
 #include "pokemonsetting.h"
-class Pokemon : public QObject
+#include "pokemonmodule_global.h"
+
+class POKEMONMODULESHARED_EXPORT Pokemon : public QObject
 {
     Q_OBJECT
 public:

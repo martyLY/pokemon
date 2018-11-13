@@ -16,7 +16,7 @@ const double CRITICAL = 0.1;
 const double coLevelupMain = 0.05;
 const double coLevelupNormal = 0.02;
 
-class HighAttack : public Pokemon
+class POKEMONMODULESHARED_EXPORT HighAttack : public Pokemon
 {
 public:
     HighAttack(){name = "Pokemon_highattack";initPokemon();}

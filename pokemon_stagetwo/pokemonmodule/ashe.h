@@ -2,7 +2,7 @@
 #define ASHE_H
 
 #include "highattack.h"
-class Ashe : public HighAttack
+class POKEMONMODULESHARED_EXPORT Ashe : public HighAttack
 {
 public:
     Ashe(QString _name){name = _name;race = the_frozen_archer_Ashe;
