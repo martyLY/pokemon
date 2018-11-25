@@ -28,6 +28,7 @@ private:
     Ui::StartMenu *startmenuUi;
 signals:
     void switchPage(int i);
+    void setMainpage(int, QString);
 public slots:
 private slots:
     void on_loginButton_clicked();

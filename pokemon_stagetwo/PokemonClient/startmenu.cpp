@@ -29,6 +29,7 @@ void StartMenu::readPendingDatagram() {
         dataReceive = QJsonDocument::fromJson(data);
         qDebug()<<dataReceive.toJson();
         if(dataReceive["DataType"] == datatype::loginyes) {
+            emit setMainpage(dataReceive["uid"].toInt(), dataReceive["nickname"].toString());
             emit switchPage(Pagename::mainpage);
         }
         else if(dataReceive["DataType"] == datatype::loginno) {

@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QStackedLayout>
+#include <QCloseEvent>
 #include "mainpage.h"
 #include "startmenu.h"
 #include "signuppage.h"
@@ -24,8 +25,8 @@ public:
 protected:
     QUdpSocket *user;
 
+    void closeEvent(QCloseEvent* );
 private slots:
-
 private:
     Mainpage *mainpage;
     StartMenu *startmenu;

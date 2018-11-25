@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     centralWidget()->setLayout(mainLayout);
     connect(startmenu, SIGNAL(switchPage(int)), stackedLayout, SLOT(setCurrentIndex(int)));
     connect(signuppage, SIGNAL(switchPage(int)), stackedLayout, SLOT(setCurrentIndex(int)));
-
+    connect(startmenu, SIGNAL(setMainpage(int, QString)), mainpage, SLOT(setUsrInfo(int, QString)));
 
 }
 
@@ -37,6 +37,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event) {
+    QJsonObject closeData;
+    closeData.insert("DataType", datatype::close);
+    user->writeDatagram(QJsonDocument(closeData).toJson(), serverAddr, port);
+    event->accept();
+}
 //void MainWindow::initSocket() {
 //    //userSend = new QUdpSocket;
 //    user = new QUdpSocket;
