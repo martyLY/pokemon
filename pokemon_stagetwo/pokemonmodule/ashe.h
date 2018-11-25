@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef ASHE_H
 #define ASHE_H
 
@@ -7,12 +9,12 @@ class POKEMONMODULESHARED_EXPORT Ashe : public HighAttack
 public:
     Ashe(QString _name){name = _name;race = the_frozen_archer_Ashe;
                             initPokemon();}
-    QString getRace();
-    QString getAllAttritubeInfo() override;
+    Ashe(QJsonDocument &);
+    QString getRace() override;
+    QJsonObject toJsonAllAttritubeInfo() override;
 
 protected:
-    Race race;
-    //void initPokemon() override;
+    //Race race;
 };
 
 #endif // ASHE_H

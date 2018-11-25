@@ -26,7 +26,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     highattack.cpp \
     ashe.cpp \
-    pokemon.cpp
+    pokemon.cpp \
+    usr.cpp
 
 HEADERS += \
         pokemonmodule_global.h \ 
@@ -34,7 +35,8 @@ HEADERS += \
     pokemon.h \
     ashe.h \
     highattack.h \
-    pokemonsetting.h
+    pokemonsetting.h \
+    usr.h
 
 unix {
     target.path = /usr/lib

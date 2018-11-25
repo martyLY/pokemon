@@ -3,6 +3,7 @@
 
 #include <QHostAddress>
 #include "pokemonmodule_global.h"
+#include "ashe.h"
 
 enum POKEMONMODULESHARED_EXPORT datatype : int{
     login,
@@ -12,6 +13,7 @@ enum POKEMONMODULESHARED_EXPORT datatype : int{
     signupyes,
     signupno,
     signuprepeat,
+    close,
 };
 
 enum POKEMONMODULESHARED_EXPORT Pagename {

@@ -6,24 +6,37 @@ void Pokemon::initPokemon() {
     this->setBaseAttribute(100, 100, 100, 0, 0, 0);
 }
 
-QString Pokemon::getAllAttritubeInfo() {
-    QString info, number;
-    info = "Name: " + this->name;
-    info = info + '\t' + "Level: " + number.setNum(this->level) + "\n";
-    //info = info + "PokemonRace: " + getRace() + "\n";
-    //info = info + "Kind: " + POKEMONKIND[(int(this->kind))] + "\n";
-    info = info + "Rarity: " + RARITY[int(this->rarity)] + "\n";
-    info = info + "BaseAttack: " + number.setNum(this->base_attack) + "\n";
-    info = info + "DefensePower: " + number.setNum(this->defense_power) + "\n";
-    info = info + "HP: " + number.setNum(this->max_hp) + "\n";
-    info = info + "AttackSpeed: " + number.setNum(this->wsp) + "\n";
-    info = info + "Avoid: " + number.setNum(this->avoid) + "\n";
-    info = info + "Critical: " + number.setNum(this->critical) + "\n";
-    info = info + "BaseSkill: " + BASESKILL[int(this->baseSkill)] + "\n";
-    //info = info + "UltimateSkill" + getUltimateSkill() + "\n";
+//Pokemon* Pokemon::getRandomPokemon(QString &pname) {
+//    Pokemon *p = (Pokemon *)new Ashe(pname);
+//    return p;
+//}
 
-    return info;
-}
+//Pokemon* Pokemon::setAllAttritubeInfo(QJsonDocument &doc) {
+
+//    switch (doc["race"].toInt() ) {
+//        case Race::the_frozen_archer_Ashe : return (Pokemon*) new Ashe(doc);
+//                                                break;
+//        default: break;
+//    }
+//}
+//QString Pokemon::getAllAttritubeInfo() {
+//    QString info, number;
+//    info = "Name: " + this->name;
+//    info = info + '\t' + "Level: " + number.setNum(this->level) + "\n";
+//    //info = info + "PokemonRace: " + getRace() + "\n";
+//    //info = info + "Kind: " + POKEMONKIND[(int(this->kind))] + "\n";
+//    info = info + "Rarity: " + RARITY[int(this->rarity)] + "\n";
+//    info = info + "BaseAttack: " + number.setNum(this->base_attack) + "\n";
+//    info = info + "DefensePower: " + number.setNum(this->defense_power) + "\n";
+//    info = info + "HP: " + number.setNum(this->max_hp) + "\n";
+//    info = info + "AttackSpeed: " + number.setNum(this->wsp) + "\n";
+//    info = info + "Avoid: " + number.setNum(this->avoid) + "\n";
+//    info = info + "Critical: " + number.setNum(this->critical) + "\n";
+//    info = info + "BaseSkill: " + BASESKILL[int(this->baseSkill)] + "\n";
+//    //info = info + "UltimateSkill" + getUltimateSkill() + "\n";
+
+//    return info;
+//}
 
 unsigned int Pokemon::getLevel() {
     return this->level;
@@ -116,4 +129,9 @@ void Pokemon::setBaseAttribute(unsigned int _base_attack,
     this->battle_wsp = _wsp;
     this->avoid = _avoid;
     this->critical = _critical;
+}
+
+
+QString Pokemon::getPokemonName() {
+    return name;
 }

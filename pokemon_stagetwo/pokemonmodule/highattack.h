@@ -1,7 +1,8 @@
+#pragma once
+
 #ifndef HIGHATTACK_H
 #define HIGHATTACK_H
 
-#include <QObject>
 #include "pokemon.h"
 
 /*高攻击力的初始属性值*/
@@ -22,10 +23,10 @@ public:
     HighAttack(){name = "Pokemon_highattack";initPokemon();}
     ~HighAttack() override {}
 
-    QString getKind();
+    QString getKind() override;
 
 protected:
-    pokemonKind kind;
+    //pokemonKind kind;
     void levelUp() override;
     void initPokemon() override;
 

@@ -3,45 +3,47 @@
 
 #endif // POKEMON_H
 
-#include <QMainWindow>
 #include <QObject>
-#include <QWidget>
 #include <QString>
 #include <QTime>
 #include <QDebug>
 #include <QtGlobal>
 #include <QMap>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include "pokemonsetting.h"
-#include "pokemonmodule_global.h"
 
-class POKEMONMODULESHARED_EXPORT Pokemon : public QObject
+class POKEMONMODULESHARED_EXPORT Pokemon : QObject
 {
     Q_OBJECT
 public:
     Pokemon():name("Pokemon"),level(1),exp(100),cur_exp(0){initPokemon();}
-    ~Pokemon(){}
-
+    virtual ~Pokemon(){}
+//    static Pokemon* getRandomPokemon(QString &);
+//    static Pokemon* setAllAttritubeInfo(QJsonDocument &);
 
     unsigned int getLevel();
+    QString getPokemonName();
     void expUp(unsigned int exp);
     QPair<unsigned int, BaseSkill> baseAttack();
     bool getHurt(QPair<unsigned int, BaseSkill> damage);
     //virtual QString getName() = 0;
     //virtual QString getUltimateSkill() = 0;
 
-    //virtual QString getRace() = 0;
-    //virtual QString getKind() = 0;
-    virtual QString getAllAttritubeInfo();
+    virtual QJsonObject toJsonAllAttritubeInfo() = 0;
+    virtual QString getRace() = 0;
+    virtual QString getKind() = 0;
 protected:
     /*pokemon's attribute*/
     QString name;
-    unsigned int level;
-    unsigned int exp;
-    unsigned int cur_exp;
-    unsigned int base_attack; //基础攻击力
-    unsigned int defense_power; //基础防御力
-    unsigned int max_hp; //最大生命值
-    unsigned int battle_hp; //当前生命值
+    uint level;
+    uint exp;
+    uint cur_exp;
+    uint base_attack; //基础攻击力
+    uint defense_power; //基础防御力
+    uint max_hp; //最大生命值
+    uint battle_hp; //当前生命值
+
     double wsp; //攻击速度
     double battle_wsp; //战斗时攻速,收对方技能影响
     double avoid; //回避率
@@ -50,6 +52,8 @@ protected:
     //pokemonKind kind; //精灵种类
     Rarity rarity; //稀有度
     BaseSkill baseSkill; //基础技能技能
+    Race race;
+    pokemonKind kind;
     //UltimateSkill ultimateSkill;//终极技能
     //Race race; //种类
 
