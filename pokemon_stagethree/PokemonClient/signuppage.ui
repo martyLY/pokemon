@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SignupPage</class>
+ <widget class="QWidget" name="SignupPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLineEdit" name="signupAccount">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>133</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="placeholderText">
+    <string>Your Account</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="signupPassword">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>213</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="placeholderText">
+    <string>Your Password</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="signupPasswordConfirm">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>253</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="placeholderText">
+    <string>Confirm your password</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="pokemonName">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>293</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>2</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="placeholderText">
+    <string>Your Pokemon Name</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="generatePokemon">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>380</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>GENERATE</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="back">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>30</y>
+     <width>98</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>BACK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="errorinfo">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>340</y>
+     <width>361</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(204, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="signupNickName">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>173</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string>Your NickName</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

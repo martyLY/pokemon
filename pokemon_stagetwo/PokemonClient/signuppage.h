@@ -7,29 +7,44 @@
 #include <QUdpSocket>
 #include <QTcpSocket>
 #include <QHostAddress>
+#include <QNetworkDatagram>
 #include <QJsonValue>
 #include <QTime>
 
 #include "global.h"
+
 namespace Ui {
     class SignupPage;
 }
+
+//注册界面类, 包含ui界面, 用于用户选择注册时的页面显示
 class SignupPage : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SignupPage(QWidget *parent = nullptr);
+    explicit SignupPage(QUdpSocket*, QWidget *parent = nullptr);
 
+    //设置socket端口号
+    void setSocketPort(quint16 port) {usrSocket->bind((port));}
+
+    //根据数据包类型做出相应处理
+    void readPendingDatagram(QNetworkDatagram );
 private:
-    QUdpSocket *user;
-    void initSocket();
-    void readPendingDatagram();
-    Ui::SignupPage *signuppageUi;
+    QUdpSocket *usrSocket;  //注册页面的socket
+    Ui::SignupPage *signuppageUi;  //ui界面
+
 signals:
+    //通知程序进行页面切换, 用于注册结束或者返回登录页面
     void switchPage(int);
 public slots:
+    //数据包读取
+    void dataRecv();
 private slots:
+    //向服务器发送生成新用户的请求
     void on_generatePokemon_clicked();
+
+    //返回登录页面
+    void on_back_clicked();
 };
 
 #endif // SIGNUPPAGE_H

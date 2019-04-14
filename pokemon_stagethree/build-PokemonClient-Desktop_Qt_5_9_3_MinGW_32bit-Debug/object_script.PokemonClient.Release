@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\mainpage.o
+./release\startmenu.o
+./release\signuppage.o
+./release\playerinfo.o
+./release\fightpage.o
+./release\pokemonchoose.o
+./release\moc_mainwindow.o
+./release\moc_mainpage.o
+./release\moc_startmenu.o
+./release\moc_signuppage.o
+./release\moc_playerinfo.o
+./release\moc_fightpage.o
+./release\moc_pokemonchoose.o
+);

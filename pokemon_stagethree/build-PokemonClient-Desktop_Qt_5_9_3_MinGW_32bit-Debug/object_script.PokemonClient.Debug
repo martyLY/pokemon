@@ -1,0 +1,17 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\mainpage.o
+./debug\startmenu.o
+./debug\signuppage.o
+./debug\playerinfo.o
+./debug\fightpage.o
+./debug\pokemonchoose.o
+./debug\moc_mainwindow.o
+./debug\moc_mainpage.o
+./debug\moc_startmenu.o
+./debug\moc_signuppage.o
+./debug\moc_playerinfo.o
+./debug\moc_fightpage.o
+./debug\moc_pokemonchoose.o
+);

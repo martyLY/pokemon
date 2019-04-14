@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "ashe.h"
+#include "anne.h"
+#include "vladimir.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +24,8 @@ private slots:
     void on_generate_pokemon_clicked();
 
     void on_getExp_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

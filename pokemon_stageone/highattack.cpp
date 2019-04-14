@@ -1,21 +1,37 @@
 #include "highattack.h"
 
+//高攻击力型精灵的的初始属性值
+//攻击力相较于其他类型精灵更高
+//攻击速度, 闪避率, 暴击率相较于其他精灵略低
+static const unsigned int BASEATTACK = 200;
+static const unsigned int DEFENSEPOWER = 80;
+static const unsigned int MAXHP = 1000;
+static const double WSP = 0.3;
+static const double AVOID = 0.08;
+static const double CRITICAL = 0.1;
+
+//升级时主属性增长系数, 主属性为攻击力
+static const double coLevelupMain = 0.05;
+
+//升级时其他属性增长系数
+static const double coLevelupNormal = 0.02;
+
+//与其他类型精灵的不同点在于setBaseAttribute函数参数的不同
+//分为主要属性和次要属性
 void HighAttack::initPokemon() {
     this->exp = 100;
     this->cur_exp = 0;
     this->level = 1;
-    this->kind = highAttack;
-    //this->setRace(); //确定种类
-    this->setRarity(); //确定稀有度
-    this->setBaseSkill();
+    this->kind = pokemonKind::highAttack;
+    this->setRarity();  //设置稀有度
 
     QString tempRarity = RARITY[this->rarity];
-    setBaseAttribute((unsigned int)(BASEATTACK*(1+coForMain[tempRarity])),
-                     (unsigned int)(DEFENSEPOWER*(1+coForNormal[tempRarity])),
-                     (unsigned int)(MAXHP*(1+coForNormal[tempRarity])),
+    setBaseAttribute(static_cast<unsigned int>(BASEATTACK*(1+coForMain[tempRarity])),
+                     static_cast<unsigned int>(DEFENSEPOWER*(1+coForNormal[tempRarity])),
+                     static_cast<unsigned int>(MAXHP*(1+coForNormal[tempRarity])),
                      double(WSP*(1+coForNormal[tempRarity])),
                      double(AVOID*(1+coForNormal[tempRarity])),
-                     double(CRITICAL*(1+coForNormal[tempRarity])));
+                     double(CRITICAL*(1+coForNormal[tempRarity]))); //攻击力与其他属性系数不同
 
 }
 
@@ -23,68 +39,16 @@ QString HighAttack::getKind() {
     return POKEMONKIND[kind];
 }
 
-
+//精灵升级时, 不同类型的精灵在不同属性上加成不同,高攻击类型精灵主要增长攻击力
+//并且不同稀有度也影响增长系数,在主属性上影响更大
 void HighAttack::levelUp() {
-    if(level >= MAX_LEVEL) return;
+    if(level >= MAX_LEVEL) return; //已经达到最高等级,无法继续升级
     this->level += 1;
-    QString tempRarity = RARITY[this->rarity];
-    setBaseAttribute((unsigned int)(base_attack*(1+coForMain[tempRarity])*(1+coLevelupMain)),
-                     (unsigned int)(defense_power*(1+coForNormal[tempRarity])*(1+coLevelupNormal)),
-                     (unsigned int)(max_hp*(1+coForNormal[tempRarity])*(1+coLevelupNormal)),
+    QString tempRarity = RARITY[this->rarity]; //根据稀有度增长属性
+    setBaseAttribute(static_cast<unsigned int>(base_attack*(1+coForMain[tempRarity])*(1+coLevelupMain)),
+                     static_cast<unsigned int>(defense_power*(1+coForNormal[tempRarity])*(1+coLevelupNormal)),
+                     static_cast<unsigned int>(max_hp*(1+coForNormal[tempRarity])*(1+coLevelupNormal)),
                      double (wsp*(1+coForNormal[tempRarity])*(1+coLevelupNormal)),
                      double (avoid*(1+coForNormal[tempRarity])*(1+coLevelupNormal)),
                      double (critical*(1+coForNormal[tempRarity])*(1+coLevelupNormal)));
 }
-
-
-//QPair<unsigned int, BaseSkill> HighAttack::Attack(){
-//    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-//    unsigned int isCritical = qrand()%100;
-//    if((unsigned int)critical*100 > isCritical) {
-//        /*产生暴击*/
-//        if(baseSkill == bloodsucking) {
-//            /*吸血技能发动*/
-//            battle_hp = (battle_hp+base_attack*1.5*0.05)>max_hp?(battle_hp+base_attack*1.5*0.05):max_hp;
-//        }
-//        return QPair<unsigned int, BaseSkill>((unsigned int)base_attack*1.5,
-//                                              baseSkill);
-//    }
-//    else {
-//        /*未产生暴击*/
-//        if(baseSkill == bloodsucking) {
-//            /*吸血技能发动*/
-//            battle_hp = (battle_hp+base_attack*0.05)>max_hp?(battle_hp+base_attack*0.05):max_hp;
-//        }
-//        return QPair<unsigned int, BaseSkill>((unsigned int)base_attack,
-//                                              baseSkill);
-//    }
-//}
-
-
-//void HighAttack::getHurt(QPair<unsigned int, BaseSkill> damage) {
-//    unsigned int hurtNumber = damage.first - defense_power;
-//    /*是否回避*/
-//    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-//    double isGet = qrand()%100;
-//    if(isGet > avoid) {
-//        /*没有回避成功,受到伤害*/
-//        this->battle_hp = (battle_hp-hurtNumber>0)?battle_hp-hurtNumber:0;
-//        if(damage.second == frozen) {
-//            /*攻击速度减少*/
-//            this->battle_wsp *= 0.1;
-//        }
-//        else if(damage.second == buring) {
-//            /*灼烧技能*/
-//            this->battle_hp -= this->max_hp*0.01;
-//        }
-//    }
-//    else {
-//        /*伤害未命中*/
-//        //todo
-//    }
-
-//    if(this->battle_hp <=0) {
-//        /*精灵死亡, 战斗失败*/
-//        //todo
-//    }
-//}

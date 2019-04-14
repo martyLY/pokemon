@@ -27,7 +27,12 @@ SOURCES += \
     highattack.cpp \
     ashe.cpp \
     pokemon.cpp \
-    usr.cpp
+    usr.cpp \
+    anne.cpp \
+    vladimir.cpp \
+    highspeed.cpp \
+    highdefense.cpp \
+    highblood.cpp
 
 HEADERS += \
         pokemonmodule_global.h \ 
@@ -36,11 +41,19 @@ HEADERS += \
     ashe.h \
     highattack.h \
     pokemonsetting.h \
-    usr.h
+    usr.h \
+    vladimir.h \
+    anne.h \
+    highspeed.h \
+    highdefense.h \
+    highblood.h
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+SUBDIRS += \
+    pokemonmodule.pro
 
 

@@ -9,15 +9,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    mainpage = new Mainpage;
-    startmenu = new StartMenu;
-    signuppage = new SignupPage;
+    usrSocket = new  QUdpSocket();    
+    quint16 port = static_cast<quint16>(QRandomGenerator::global()->bounded(65535));
+    this->usrSocket->bind(port);
+
+    mainpage = new Mainpage(usrSocket);
+    startmenu = new StartMenu(usrSocket);
+    signuppage = new SignupPage(usrSocket);
+
     stackedLayout = new QStackedLayout();
     mainLayout = new QVBoxLayout();
-
     mainWidget = new QWidget(this);
     setCentralWidget(mainWidget);
-
 
     stackedLayout->addWidget(startmenu);
     stackedLayout->addWidget(signuppage);
@@ -28,8 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     centralWidget()->setLayout(mainLayout);
     connect(startmenu, SIGNAL(switchPage(int)), stackedLayout, SLOT(setCurrentIndex(int)));
     connect(signuppage, SIGNAL(switchPage(int)), stackedLayout, SLOT(setCurrentIndex(int)));
-    connect(startmenu, SIGNAL(setMainpage(int, QString)), mainpage, SLOT(setUsrInfo(int, QString)));
-
+    connect(startmenu, SIGNAL(setOnlineUsrList(QJsonDocument)), mainpage, SLOT(setOtherUsrInfo(QJsonDocument)));
+    connect(startmenu, SIGNAL(setUsr(QJsonDocument)), mainpage, SLOT(setClientUsr(QJsonDocument)));
+    connect(usrSocket, SIGNAL(readyRead()), this, SLOT(choosePageToProcessData()));
 }
 
 MainWindow::~MainWindow()
@@ -38,60 +42,50 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-    QJsonObject closeData;
-    closeData.insert("DataType", datatype::close);
-    user->writeDatagram(QJsonDocument(closeData).toJson(), serverAddr, port);
+    if(stackedLayout->currentIndex() == 2) {
+        //如果是主界面关闭, 需要通知服务端
+        mainpage->close();
+    }
+    else if(stackedLayout->currentIndex() == 3) {
+        //to do
+    }
     event->accept();
 }
-//void MainWindow::initSocket() {
-//    //userSend = new QUdpSocket;
-//    user = new QUdpSocket;
-//    serverAddr.setAddress(QHostAddress::LocalHost);
-//    //qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-//    serverPort = 2333;
-//}
-//void MainWindow::on_logininButton_clicked()
+
+void MainWindow::choosePageToProcessData() {
+    //根据当前显示的页面是哪个 来决定执行哪个页面的dataRecv函数
+    //qDebug()<<"currentindex:"<<stackedLayout->currentIndex()<<endl;
+    switch (stackedLayout->currentIndex()) {
+    case 0: startmenu->dataRecv(); break;
+    case 1: signuppage->dataRecv(); break;
+    case 2: mainpage->dataRecv(); break;
+    default: break;
+    }
+}
+
+//void MainWindow::choosePageToProcessData()
 //{
-//    //to do
-//    //将数据传给服务器,确定账号密码是否正确
-//    QJsonObject loginData;
-//    loginData.insert("DataType", datatype::loginin);
-//    loginData.insert("name", ui->loginName->text());
-//    loginData.insert("password", ui->loginPassword->text());
-//    /* to do
-//     * 1.缺少字符串格式判断
-//     * 2.缺少加密
-//     */
-//    QJsonDocument loginDataToSend(loginData);
-//    if(user->writeDatagram(loginDataToSend.toJson(), serverAddr, serverPort)
-//            < loginDataToSend.toJson().length()) {
 
-//        //消息没有传送完, 报错
-//        qDebug()<<"Network errer, no send,please try again!"<<endl;
-//    }
-//    else {
-//        //传输成功
-//        if(user->waitForReadyRead(600)) {
-//            //返回true,没有超时
-//            readPendingDatagram();
-//        }
-//        else {
-//            qDebug()<<"Network errer, no reply, please try again!"<<endl;
-//        }
+//    QNetworkDatagram datagram;
+//    while(usrSocket->hasPendingDatagrams())
+//        datagram = usrSocket->receiveDatagram();
+//    QJsonDocument dataJson = QJsonDocument::fromJson(datagram.data());
+//    qDebug()<<dataJson<<endl;
+//    switch (dataJson["DataType"].toInt()) {
+//    case datatype::loginno: startmenu->readPendingDatagram(datagram); break;
+//    case datatype::loginyes: startmenu->readPendingDatagram(datagram); break;
+
+//    case datatype::signupno: signuppage->readPendingDatagram(datagram); break;
+//    case datatype::signupyes: signuppage->readPendingDatagram(datagram); break;
+//    case datatype::signuprepeat: signuppage->readPendingDatagram(datagram); break;
+
+//    case datatype::onlineusradd: mainpage->readPendingDatagram(datagram); break;
+//    case datatype::onlineusrerase: mainpage->readPendingDatagram(datagram); break;
+//    case datatype::close: mainpage->readPendingDatagram(datagram); break;
+
+//    default: break;
 //    }
 //}
 
-//void MainWindow::readPendingDatagram() {
-//    QJsonDocument dataReceive;
-//    QByteArray data;
-//    data.resize(user->pendingDatagramSize());
-//    user->readDatagram(data.data(), data.size());
-//    dataReceive.fromJson(data);
-//    if(dataReceive["DataType"] == datatype::loginin) {
-//        /*登录成功
-//         * to do 切换页面
-//         * 载入用户信息
-//         */
-//    }
-//}
+
 

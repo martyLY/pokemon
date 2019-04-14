@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QStackedLayout>
 #include <QCloseEvent>
+#include <QRandomGenerator>
 #include "mainpage.h"
 #include "startmenu.h"
 #include "signuppage.h"
@@ -20,13 +21,13 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
-
 protected:
-    QUdpSocket *user;
-
-    void closeEvent(QCloseEvent* );
+    QUdpSocket *usrSocket;
+    void closeEvent(QCloseEvent *);
 private slots:
+    void choosePageToProcessData();
 private:
     Mainpage *mainpage;
     StartMenu *startmenu;

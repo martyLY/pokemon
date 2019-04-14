@@ -18,7 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    udpserver.cpp \
+    udpserver.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,7 +26,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    udpserver.h \
+    udpserver.h
 
 
 
@@ -36,3 +36,6 @@ else:unix: LIBS += -L$$PWD/../pokemonmodule/ -lpokemonmodule
 
 INCLUDEPATH += $$PWD/../pokemonmodule
 DEPENDPATH += $$PWD/../pokemonmodule
+
+FORMS += \
+    playerinfo.ui

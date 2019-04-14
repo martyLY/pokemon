@@ -18,10 +18,10 @@ Usr::Usr(QJsonDocument usrdata) {
     pokemonCount = usrdata["pokemoncount"].toVariant().toUInt();
     winCount = usrdata["wincount"].toVariant().toUInt();
     loseCount = usrdata["losecount"].toVariant().toUInt();
-    fightCount = usrdata["fight"].toVariant().toUInt();
-    badgeCount = usrdata["badgeCount"].toVariant().toUInt();
-
+    fightCount = usrdata["fightcount"].toVariant().toUInt();
+    badgeCount = usrdata["badgecount"].toVariant().toUInt();
 }
+
 void Usr::fightFinishWin() {
     winCount ++;
     fightCount ++;
@@ -33,29 +33,31 @@ void Usr::fightFinishLose() {
 }
 
 void Usr::addPokemon(QString pname) {
-    /*
-     *为用户随机添加一个小精灵
-     */
+
     Usr::defaultname++;
     Pokemon *p;
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-//    switch ((int)qrand()%RACE.length()) {
-//    case Race::the_frozen_archer_Ashe : p = new Ashe(pname); break;
-//    default: break;
-//    }
-    p = new Ashe(pname);
+
+    //生成随机数, 随机决定生成的精灵种族
+    int whatisp = QRandomGenerator::global()->bounded(RACE.size());
+    switch (whatisp) {
+    case Race::the_frozen_archer_Ashe : p = new Ashe(pname); break;
+    case Race::the_dark_child_Anne : p = new Anne(pname); break;
+    case Race::the_crimson_reaper_Vladimir : p = new Vladimir(pname); break;
+    default: break;
+    }
+
+    //添加精灵进列表
     pokemonVector.push_back(p);
     pokemonCount++;
-    /* to do
-     * usr数据写回
-     * 精灵名字重复
-     */
 }
 
 void Usr::addPokemon(QJsonDocument pdata ) {
+    //根据数据库传回信息确定生成的精灵
     Pokemon *p;
     switch (pdata["race"].toVariant().toInt()) {
     case Race::the_frozen_archer_Ashe : p = new Ashe(pdata); break;
+    case Race::the_dark_child_Anne : p = new Anne(pdata); break;
+    case Race::the_crimson_reaper_Vladimir : p = new Vladimir(pdata); break;
     default:break;
     }
 
@@ -64,9 +66,7 @@ void Usr::addPokemon(QJsonDocument pdata ) {
 }
 
 void Usr::losePokemon(const QString pname) {
-    /*
-     *移除一个精灵名字为pname
-     */
+    //移除精灵列表中名为pname的精灵
     QVector<Pokemon*>::iterator iter;
     for(iter = pokemonVector.begin(); iter != pokemonVector.end(); iter++) {
         Pokemon *p = *iter;
@@ -74,31 +74,27 @@ void Usr::losePokemon(const QString pname) {
             pokemonVector.erase(iter);
         }
     }
-    /*to do
-     * usr数据回写
-     */
-
 }
 
-QByteArray Usr::toJsonUsrInfo(){
+QJsonValue Usr::toJsonUsrInfo(){
     QJsonObject object;
-    object.insert("nickName", QJsonValue(nickName));
-    object.insert("pokemonCount", QJsonValue::fromVariant(pokemonCount));
-    object.insert("winCount", QJsonValue::fromVariant(winCount));
-    object.insert("loseCount", QJsonValue::fromVariant(loseCount));
-    object.insert("figtCount", QJsonValue::fromVariant(fightCount));
-    object.insert("badgeCount", QJsonValue::fromVariant(badgeCount));
+    object.insert("uid", QJsonValue(uid));
+    object.insert("nickname", QJsonValue(nickName));
+    object.insert("pokemoncount", QJsonValue::fromVariant(pokemonCount));
+    object.insert("wincount", QJsonValue::fromVariant(winCount));
+    object.insert("losecount", QJsonValue::fromVariant(loseCount));
+    object.insert("figtcount", QJsonValue::fromVariant(fightCount));
+    object.insert("badgecount", QJsonValue::fromVariant(badgeCount));
 
-    return QJsonDocument(object).toJson();
+    return QJsonValue(object);
 }
 
 QList<QVariant> Usr::getALLPokemon() {
-    QList<QVariant> list;
+    QList<QVariant> list; //精灵信息列表
     QVector<Pokemon*>::iterator iter;
     for(iter = pokemonVector.begin(); iter != pokemonVector.end(); iter++) {
         list.append((*iter)->toJsonAllAttritubeInfo());
     }
-
     return list;
 }
 

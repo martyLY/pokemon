@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Mainpage</class>
+ <widget class="QWidget" name="Mainpage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QListWidget" name="onlineList">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>20</y>
+     <width>201</width>
+     <height>501</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="matchBot">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>98</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>match</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="normalFightMatch">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>90</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>Normal Fight</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deadFightMatch">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>30</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lalezar</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>Dead Fight</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

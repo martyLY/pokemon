@@ -13,6 +13,16 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QListWidget" name="onlineList">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>20</y>
+     <width>221</width>
+     <height>351</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

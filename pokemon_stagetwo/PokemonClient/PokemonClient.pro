@@ -29,19 +29,23 @@ SOURCES += \
         mainwindow.cpp \
     mainpage.cpp \
     startmenu.cpp \
-    signuppage.cpp
+    signuppage.cpp \
+    playerinfo.cpp
 
 HEADERS += \
         mainwindow.h \
     mainpage.h \
     startmenu.h \
-    signuppage.h
+    signuppage.h \
+    playerinfo.h
 
 FORMS += \
     mainpage.ui \
     mainwindow.ui \
     startmenu.ui \
-    signuppage.ui
+    signuppage.ui \
+    playerinfo.ui \
+    playerinfodetail.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

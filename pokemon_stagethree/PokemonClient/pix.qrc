@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/rc">
+        <file>pix/no.png</file>
+        <file>pix/yes.png</file>
+        <file>pix/blankbacksmall.png</file>
+        <file>pix/blackbar3.png</file>
+        <file>pix/blackbar1.png</file>
+        <file>pix/blackbar2.png</file>
+        <file>pix/heart.png</file>
+        <file>pix/yellowbar.png</file>
+        <file>pix/bluebar.png</file>
+        <file>pix/元素 (7).png</file>
+        <file>pix/sdfsdf.png</file>
+        <file>pix/detail.png</file>
+        <file>pix/blackbackbig.png</file>
+        <file>pix/close.png</file>
+        <file>pix/myinfo.png</file>
+        <file>pix/dead.png</file>
+        <file>pix/normal.png</file>
+        <file>pix/back.png</file>
+        <file>pix/gen.png</file>
+        <file>pix/redbar.png</file>
+        <file>pix/orangebar.png</file>
+        <file>pix/greenbar.png</file>
+        <file>pix/元素 (9).png</file>
+        <file>pix/signup.png</file>
+        <file>pix/login.png</file>
+        <file>pix/GUI (14).png</file>
+        <file>pix/带标题主界面.png</file>
+    </qresource>
+</RCC>

@@ -1,5 +1,6 @@
 #include "pokemon.h"
 
+//@function: 初始化精灵属性
 void Pokemon::initPokemon() {
     this->setBaseSkill();
     this->setRarity();
@@ -10,8 +11,6 @@ QString Pokemon::getAllAttritubeInfo() {
     QString info, number;
     info = "Name: " + this->name;
     info = info + '\t' + "Level: " + number.setNum(this->level) + "\n";
-    //info = info + "PokemonRace: " + getRace() + "\n";
-    //info = info + "Kind: " + POKEMONKIND[(int(this->kind))] + "\n";
     info = info + "Rarity: " + RARITY[int(this->rarity)] + "\n";
     info = info + "BaseAttack: " + number.setNum(this->base_attack) + "\n";
     info = info + "DefensePower: " + number.setNum(this->defense_power) + "\n";
@@ -20,7 +19,6 @@ QString Pokemon::getAllAttritubeInfo() {
     info = info + "Avoid: " + number.setNum(this->avoid) + "\n";
     info = info + "Critical: " + number.setNum(this->critical) + "\n";
     info = info + "BaseSkill: " + BASESKILL[int(this->baseSkill)] + "\n";
-    //info = info + "UltimateSkill" + getUltimateSkill() + "\n";
 
     return info;
 }
@@ -35,69 +33,58 @@ void Pokemon::expUp(unsigned int _exp) {
         //循环以多次升级
         this->levelUp();
         cur_exp -= exp;
-        exp = (unsigned int)(exp*1.2); //升级的经验值增长
+        exp = static_cast<unsigned int>(exp*1.2); //升级的经验值增长
     }
     this->battle_hp = max_hp; //升级生命值恢复
 }
 
 void Pokemon::setBaseSkill() {
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-    int _baseSkill = qrand()%(BASESKILL.length());
+    int _baseSkill = QRandomGenerator::global()->bounded(BASESKILL.length()-1);
     this->baseSkill = BaseSkill(_baseSkill);
 }
 
 void Pokemon::setRarity() {
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-    int _rarity = qrand()%(RARITY.length());
+    int _rarity = QRandomGenerator::global()->bounded(RARITY.length()-1);
     this->rarity = Rarity(_rarity);
 }
 
 QPair<unsigned int, BaseSkill> Pokemon::baseAttack() {
-
-    //UltimateSkill todo
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-    unsigned int isCritical = qrand()%100;
-    if((unsigned int)critical*100 > isCritical) {
-        /*产生暴击*/
-        if(baseSkill == bloodsucking) {
-            /*吸血技能发动*/
-            battle_hp = (battle_hp+base_attack*1.5*0.05)>max_hp?(battle_hp+base_attack*1.5*0.05):max_hp;
-        }
-        return QPair<unsigned int, BaseSkill>((unsigned int)base_attack*1.5,
-                                              baseSkill);
+    unsigned int isCritical = static_cast<unsigned int>(QRandomGenerator::global()->bounded(100));
+    if (static_cast<unsigned int>(critical*100) > isCritical) {
+        //产生暴击, 伤害为正常的1.5倍
+        return QPair<unsigned int, BaseSkill>(static_cast<unsigned int>(base_attack*1.5),
+                                              BaseSkill::none);
     }
     else {
-        /*未产生暴击*/
-        if(baseSkill == bloodsucking) {
-            /*吸血技能发动*/
-            battle_hp = (battle_hp+base_attack*0.05)>max_hp?(battle_hp+base_attack*0.05):max_hp;
-        }
-        return QPair<unsigned int, BaseSkill>((unsigned int)base_attack,
-                                              baseSkill);
+        //未产生暴击
+        return QPair<unsigned int, BaseSkill>(static_cast<unsigned int>(base_attack),
+                                              BaseSkill::none);
     }
 }
 
 bool Pokemon::getHurt(QPair<unsigned int, BaseSkill> damage) {
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-    unsigned int isAvoid = qrand()%100;
-    if(isAvoid > avoid) {
-        unsigned int hurtNumber = damage.first - defense_power;
-        this->battle_hp = (battle_hp-hurtNumber>0)?battle_hp-hurtNumber:0;
+    unsigned int isAvoid = static_cast<unsigned int>(QRandomGenerator::global()->bounded(100));
+    if (isAvoid > avoid) {
+        //伤害命中未闪避
+        unsigned int hurtNumber = damage.first > defense_power ?
+                                        damage.first - defense_power : 0;  //比较以防止unsigned int数值越界
+        this->battle_hp = (battle_hp > hurtNumber)?battle_hp-hurtNumber:0;  //严格使用大小比较而不要用相减判断, 可能会造成越界
 
         if(battle_hp <= 0) {
             //精灵死亡,战斗结束
             //触发战斗结束信号
         }
         switch (damage.second) {
-            case buring: battle_hp -= max_hp*BURING_DAMAGE;break;
-            case frozen: battle_wsp -= (wsp-battle_wsp)<wsp*FROZEN_DAMAGE*FROZEN_TIME?
-                                            FROZEN_DAMAGE*wsp:0;break;
-            case bloodsucking: break;
+        case buring: battle_hp -= max_hp*BURING_DAMAGE;break;  //以最大生命值的一定比例造成伤害
+        case frozen: battle_wsp -= (wsp-battle_wsp)<wsp*FROZEN_DAMAGE*FROZEN_TIME?
+                                            FROZEN_DAMAGE*wsp:0;break;  //减少攻击速度,最多减少三次
+        case bloodsucking: break;
+        case none: break;
         }
         return true;
     }
     else {
-        //show miss
+        //攻击miss
         return false;
     }
 }

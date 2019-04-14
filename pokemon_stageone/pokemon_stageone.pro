@@ -29,14 +29,24 @@ SOURCES += \
         mainwindow.cpp \
     pokemon.cpp \
     highattack.cpp \
-    ashe.cpp
+    ashe.cpp \
+    highblood.cpp \
+    highdefense.cpp \
+    highspeed.cpp \
+    anne.cpp \
+    vladimir.cpp
 
 HEADERS += \
         mainwindow.h \
     pokemon.h \
     highattack.h \
     pokemonsetting.h \
-    ashe.h
+    ashe.h \
+    highblood.h \
+    highdefense.h \
+    highspeed.h \
+    anne.h \
+    vladimir.h
 
 FORMS += \
         mainwindow.ui

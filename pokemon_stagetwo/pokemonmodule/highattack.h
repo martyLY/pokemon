@@ -5,31 +5,28 @@
 
 #include "pokemon.h"
 
-/*高攻击力的初始属性值*/
-const unsigned int BASEATTACK = 200;
-const unsigned int DEFENSEPOWER = 80;
-const unsigned int MAXHP = 100;
-const double WSP = 0.7;
-const double AVOID = 0.08;
-const double CRITICAL = 0.1;
-
-/*升级属性增长系数*/
-const double coLevelupMain = 0.05;
-const double coLevelupNormal = 0.02;
-
+//基类pokemon的派生类
+//也是抽象类,主要实现了基类的levelup函数
+//以及重构了initpokemon初始化精灵函数
 class POKEMONMODULESHARED_EXPORT HighAttack : public Pokemon
 {
 public:
-    HighAttack(){name = "Pokemon_highattack";initPokemon();}
+    HighAttack(){ name = "Pokemon_highattack";
+                     initPokemon();}
     ~HighAttack() override {}
 
+    //获得精灵的类型, 本类型为高攻击
     QString getKind() override;
 
 protected:
-    //pokemonKind kind;
-    void levelUp() override;
-    void initPokemon() override;
+    //精灵类型
+    pokemonKind kind;
 
+    //精灵升级时调用, 为精灵属性做出改变
+    void levelUp() override;
+
+    //初始化精灵属性
+    void initPokemon() override;
 };
 
 #endif // HIGHATTACK_H

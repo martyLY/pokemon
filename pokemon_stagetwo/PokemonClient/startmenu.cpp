@@ -1,47 +1,52 @@
 #include "startmenu.h"
 #include "ui_startmenu.h"
 
-StartMenu::StartMenu(QWidget *parent) :
-    QWidget(parent),
+StartMenu::StartMenu(QUdpSocket *socket, QWidget *parent) :
+    QWidget(parent), usrSocket(socket),
     startmenuUi(new Ui::StartMenu)
 {
     startmenuUi->setupUi(this);
-    initSocket();
 }
 
 StartMenu::~StartMenu() {
     delete startmenuUi;
 }
 
-void StartMenu::initSocket() {
-    user = new QUdpSocket(this);
-//    serverAddr.setAddress(QHostAddress::LocalHost);
-//    port = 2333;
+
+void StartMenu::dataRecv() {
+    while(usrSocket->hasPendingDatagrams())
+    {
+        readPendingDatagram(usrSocket->receiveDatagram());
+    }
 }
 
-void StartMenu::readPendingDatagram() {
+void StartMenu::readPendingDatagram(QNetworkDatagram datagram) {
+    startmenuUi->errorinfo->clear();
     QJsonDocument dataReceive;
-    QByteArray data;
+    dataReceive = QJsonDocument::fromJson(datagram.data());  //获取数据包信息
 
-    while(user->hasPendingDatagrams()){
-        data.resize(user->pendingDatagramSize());
-        user->readDatagram(data.data(), data.size());
-        dataReceive = QJsonDocument::fromJson(data);
-        qDebug()<<dataReceive.toJson();
-        if(dataReceive["DataType"] == datatype::loginyes) {
-            emit setMainpage(dataReceive["uid"].toInt(), dataReceive["nickname"].toString());
-            emit switchPage(Pagename::mainpage);
-        }
-        else if(dataReceive["DataType"] == datatype::loginno) {
-            startmenuUi->errorinfo->setText("Password fails, please try again!");
-        }
+    if(dataReceive["DataType"] == datatype::loginyes) {
+        //登陆成功
+        emit setUsr(dataReceive);  //根据数据包内容设置本用户信息
+        emit switchPage(Pagename::mainpage);  //跳转主页面
     }
-
+    else if(dataReceive["DataType"] == datatype::loginno) {
+        startmenuUi->errorinfo->setText("Password fails, please try again!");  //注册失败消息显示
+    }
+    else if(dataReceive["DataType"] == datatype::onlineusradd) {
+        //用户上线通知
+        emit setOnlineUsrList(dataReceive);  //根据数据包内容更新信息
+    }
 }
 
 void StartMenu::on_loginButton_clicked()
 {
-    //to do
+    //登录过程说明, 客户端发送账号密码信息, 并且等待服务端做出响应
+    if(startmenuUi->loginPassword->text().isEmpty() || startmenuUi->loginName->text().isEmpty()) {
+        //账户或者密码为空
+        startmenuUi->errorinfo->setText("用户名或密码为空!");
+    }
+    else {
         //将数据传给服务器,确定账号密码是否正确
         QJsonObject loginData;
         loginData.insert("DataType", datatype::login);
@@ -53,21 +58,23 @@ void StartMenu::on_loginButton_clicked()
          */
         QJsonDocument loginDataToSend(loginData);
 
-        if(user->writeDatagram(loginDataToSend.toJson(), serverAddr, port) == -1) {
+        if(usrSocket->writeDatagram(loginDataToSend.toJson(), serverAddr, port) == -1) {
             //消息没有传送完, 报错
-            startmenuUi->errorinfo->setText("Network errer, no send,please try again!");
+            startmenuUi->errorinfo->setText("网络错误，请重试");
         }
         else {
             //传输成功
-            if(user->waitForReadyRead(600)) {
+            if(usrSocket->waitForReadyRead(600)) {
                 //返回true,没有超时
-                startmenuUi->errorinfo->clear();
-                readPendingDatagram();
+                //startmenuUi->errorinfo->clear();
+                //readPendingDatagram();
             }
             else {
-                startmenuUi->errorinfo->setText("Network respond time out,please try again!");
+                //超时
+                startmenuUi->errorinfo->setText("网络超时，请重试");
             }
         }
+    }
 }
 
 void StartMenu::on_signupButton_clicked()
