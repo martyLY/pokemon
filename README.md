@@ -18,7 +18,7 @@
 
 ---------------------------
 
-![系统架构设计](/Pokemon/pic/系统架构设计.jpg)
+![系统架构设计](/pic/系统架构设计.jpg)
 
 
 
@@ -34,7 +34,7 @@
 
   此模块中的类图间的关系如下图所示.
 
-![ClassDiagram1](/Pokemon/pic/ClassDiagram1.jpg)
+![ClassDiagram1](/pic/ClassDiagram1.jpg)
 
 
   精灵的组成分为三层
