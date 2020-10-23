@@ -118,7 +118,7 @@ static const double coLevelupNormal = 0.02;
 
 ### 通信信号帧格式
 
-  ![1546251184238](/Pokemon/pic/1546251184238.png)
+  ![1546251184238](/pic/1546251184238.png)
 
 DataType为数据帧的格式,规定了之后context里面的内容, context的内容根据需要可能分成多段, 整体使用`QJsonDocument`存储
 
@@ -139,7 +139,7 @@ DataType为数据帧的格式,规定了之后context里面的内容, context的�
 ### 客户端架构
 
 
-![asdasd](/Pokemon/pic//asdasd.jpg)
+![asdasd](/pic//asdasd.jpg)
 
 
 
@@ -153,7 +153,7 @@ DataType为数据帧的格式,规定了之后context里面的内容, context的�
   开始页面模块位于`startmenu.h`。该模块完成用户的登录操作，对用户输入的账户密码发送到服务端进行确认，根据结果决定跳转页面还是提示相应的作为信息.
 
   #### 模块架构
-  ![开始界面](/Pokemon/pic/开始界面.jpg)
+  ![开始界面](/pic/开始界面.jpg)
 
 
 
@@ -162,7 +162,7 @@ DataType为数据帧的格式,规定了之后context里面的内容, context的�
   注册页面模块位于`signuppage.h`。该模块完成用户的注册操作。 用户在输入相应需要的信息之后， 将信息发送至服务端进行处理， 根据返回结果跳转页面和做出相应的信息提示
 
   #### 模块架构
-  ![注册界面](/Pokemon/pic/注册界面.jpg)
+  ![注册界面](/pic/注册界面.jpg)
 
 
 
@@ -170,7 +170,7 @@ DataType为数据帧的格式,规定了之后context里面的内容, context的�
   主页面模块位于`mainpage.h`。该模块提供用户查看当前在线用户的信息和进行战斗选择的功能
 
   #### 模块架构
-  ![主界面界面](/Pokemon/pic/主界面界面.jpg)
+  ![主界面界面](/pic/主界面界面.jpg)
 
 
 
@@ -197,7 +197,7 @@ DataType为数据帧的格式,规定了之后context里面的内容, context的�
   服务端在设计的时候充分考虑到多用户，多客户端，多个用户端同时战斗的情景。客户端消息的处理采用线程池的方式，提高并发处理的能力。 战斗系统则使用线程，实现多个客户端同时战斗的需要。
 
 ### 服务端框架
-![server](/Pokemon/pic/server.jpg)
+![server](/pic/server.jpg)
 
 
 
@@ -209,7 +209,7 @@ DataType为数据帧的格式,规定了之后context里面的内容, context的�
   
 
   #### 模块架构
- ![消息处理](/Pokemon/pic/消息处理.jpg)
+ ![消息处理](/pic/消息处理.jpg)
 
 
 
@@ -218,7 +218,7 @@ DataType为数据帧的格式,规定了之后context里面的内容, context的�
   战斗核心模块位于`fightcore.h`中，此模块完成精灵对战的功能。 根据构建的参数的不同，进行包括PVE，PVP，普通决斗，死斗等不同模式组合的决斗过程。 并在战斗结束后与客户端进行交互，进行精灵升级，损失或者获得精灵，账户信息回写到数据库等操作。
 
   #### 模块架构
-  ![战斗核心](/Pokemon/pic/战斗核心.jpg)
+  ![战斗核心](/pic/战斗核心.jpg)
 
 
 
